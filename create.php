@@ -9,9 +9,13 @@ header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type
 include '../conn.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {    # code...
 
-$data = json_decode(file_get_contents('php://input'), true);
+$data = json_decode(file_get_contents('php://input'),true);
     $fname = $data['fname'];
+    // $fname = $data->fname;
     $lname = $data['lname'];
+// echo $fname."<br>";
+// echo $lname."<br>";
+
 
 if (!empty($fname) && !empty($lname)) {
     # code...
@@ -24,6 +28,9 @@ if (!empty($fname) && !empty($lname)) {
         http_response_code(403);
         echo json_encode(array("status" => false, "message" => "Student not registered"));
     }
+}else{
+    http_response_code(403);
+  echo json_encode(array("status"=>"false","message"=>"In approtiate data"));
 }
 }
 ?>
